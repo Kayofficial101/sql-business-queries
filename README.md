@@ -1,22 +1,32 @@
 # SQL for business analysis
 
-Eight MySQL 8.0 queries for recurring commercial and reporting questions.
+This repository contains eight MySQL 8.0 queries for business questions that come up repeatedly in reporting and analysis.
 
-| # | Question | Main SQL |
-|---|---|---|
-| 1 | How is revenue changing month by month? | CTE, `LAG`, safe division |
-| 2 | Which customers drive lifetime value? | Aggregation and ranking |
-| 3 | How does retention change by acquisition cohort? | Multi-step CTE and date arithmetic |
-| 4 | What is the running trend and three-month average? | Window frames |
-| 5 | Which products are bought together? | Self-join and basket analysis |
-| 6 | Which products lead each category? | `DENSE_RANK` and partitioning |
-| 7 | Which valuable customers have gone inactive? | `HAVING` and recency |
-| 8 | Is the order data safe to report? | Duplicate, null and domain checks |
+## What is included
 
-## Run
+| Business question | SQL used |
+|---|---|
+| How is revenue changing each month? | CTE, `LAG`, safe division |
+| Which customers drive lifetime value? | Aggregation and ranking |
+| How does retention change by acquisition cohort? | Multi-step CTE and date arithmetic |
+| What is the running trend and three-month average? | Window frames |
+| Which products are bought together? | Self-join and basket analysis |
+| Which products lead each category? | `DENSE_RANK` and partitioning |
+| Which valuable customers have gone inactive? | `HAVING` and recency |
+| Is the order data safe to report? | Duplicate, null and domain checks |
 
-1. Create the tables with [`schema.sql`](schema.sql).
+## How I structured it
+
+Completed orders are isolated before revenue is calculated. Divisions use `NULLIF` when a denominator could be zero. Cohort size is calculated separately so the retention percentage can be checked.
+
+## Tools used
+
+MySQL 8.0, CTEs, window functions, joins, date functions and data-quality checks.
+
+## Run it
+
+1. Create the tables with [schema.sql](schema.sql).
 2. Load customer, product, order and order-item data.
-3. Run the numbered sections in [`business_queries.sql`](business_queries.sql) independently.
+3. Run the numbered sections in [business_queries.sql](business_queries.sql) one at a time.
 
-Completed orders are isolated before revenue calculations. Divisions use `NULLIF` when the denominator may be zero. Cohort size is calculated separately so the retention percentage can be checked. Several date functions are MySQL-specific, so the repository does not claim PostgreSQL compatibility.
+Some date functions are specific to MySQL, so the queries are not presented as PostgreSQL-compatible.
