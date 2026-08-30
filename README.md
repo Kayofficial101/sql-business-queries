@@ -17,8 +17,8 @@ Eight focused **MySQL 8.0** query patterns for common commercial and operating q
 
 ## Files
 
-- [`business_queries.sql`](business_queries.sql) — the eight analysis queries
-- [`schema.sql`](schema.sql) — minimal table definitions and relationships
+- [`business_queries.sql`](business_queries.sql): the eight analysis queries
+- [`schema.sql`](schema.sql): minimal table definitions and relationships
 
 ## Run order
 
