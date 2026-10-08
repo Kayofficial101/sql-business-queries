@@ -83,8 +83,10 @@ SELECT
     COUNT(*) AS orders_together
 FROM order_items i1
 JOIN order_items i2 ON i1.order_id = i2.order_id AND i1.product_id < i2.product_id
+JOIN orders o ON o.order_id = i1.order_id
 JOIN products p1 ON p1.product_id = i1.product_id
 JOIN products p2 ON p2.product_id = i2.product_id
+WHERE o.status = 'Completed'
 GROUP BY p1.product_name, p2.product_name
 HAVING COUNT(*) >= 3
 ORDER BY orders_together DESC
